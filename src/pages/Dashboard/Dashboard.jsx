@@ -38,8 +38,8 @@ const Dashboard = () => {
     return (
         <DashboardLayout>
             <div className="relative min-h-screen bg-surface-50 dark:bg-surface-950 pb-20">
-                {/* Hero Section - Swiggy Style */}
-                <div className="relative bg-gradient-to-r from-orange-500 to-rose-500 dark:from-orange-600 dark:to-rose-700 pb-40 pt-16 px-8">
+                {/* Hero Section - Cloud Blue Style */}
+                <div className="relative bg-gradient-to-r from-sky-400 to-blue-600 dark:from-sky-600 dark:to-blue-800 pb-40 pt-16 px-8">
                     <div className="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
                         <motion.div
                             initial={{ y: -20, opacity: 0 }}
@@ -75,15 +75,15 @@ const Dashboard = () => {
                             className="w-full max-w-2xl relative group z-20"
                         >
                             <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
-                                <Search className="h-6 w-6 text-surface-400 group-focus-within:text-orange-500 transition-colors" />
+                                <Search className="h-6 w-6 text-surface-400 group-focus-within:text-blue-500 transition-colors" />
                             </div>
                             <input
                                 type="text"
-                                className="block w-full pl-14 pr-4 py-5 rounded-2xl border-none shadow-2xl bg-white text-surface-900 placeholder-surface-400 focus:ring-4 focus:ring-orange-500/30 text-lg transition-all"
+                                className="block w-full pl-14 pr-4 py-5 rounded-2xl border-none shadow-2xl bg-white text-surface-900 placeholder-surface-400 focus:ring-4 focus:ring-blue-500/30 text-lg transition-all"
                                 placeholder="Search for files, folders, or documents..."
                             />
                             <div className="absolute inset-y-0 right-3 flex items-center">
-                                <button className="bg-orange-500 hover:bg-orange-600 text-white p-2.5 rounded-xl transition-colors shadow-lg shadow-orange-500/30">
+                                <button className="bg-blue-500 hover:bg-blue-600 text-white p-2.5 rounded-xl transition-colors shadow-lg shadow-blue-500/30">
                                     <Cloud className="h-6 w-6" />
                                 </button>
                             </div>
@@ -92,7 +92,7 @@ const Dashboard = () => {
 
                     {/* Decorative Background Elements */}
                     <div className="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl"></div>
-                    <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 w-[500px] h-[500px] bg-yellow-500/20 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 w-[500px] h-[500px] bg-sky-400/20 rounded-full blur-3xl"></div>
 
                     {/* Floating Abstract Shapes */}
                     <motion.div
@@ -117,7 +117,7 @@ const Dashboard = () => {
                         <h2 className="text-2xl font-bold text-white drop-shadow-md hidden md:block">Your Collections</h2>
                         <button
                             onClick={() => setIsUploadOpen(true)}
-                            className="flex items-center space-x-2 px-6 py-3 bg-white text-orange-600 rounded-full shadow-xl hover:bg-orange-50 transition-all font-bold transform hover:-translate-y-0.5"
+                            className="flex items-center space-x-2 px-6 py-3 bg-white text-blue-600 rounded-full shadow-xl hover:bg-blue-50 transition-all font-bold transform hover:-translate-y-0.5"
                         >
                             <Plus size={20} />
                             <span>Quick Upload</span>
@@ -161,7 +161,7 @@ const Dashboard = () => {
                 <div className="max-w-7xl mx-auto px-6 mt-16">
                     <div className="flex items-center justify-between mb-8 px-2">
                         <h2 className="text-2xl font-bold text-surface-900 dark:text-white">Recent Activities</h2>
-                        <button className="text-orange-600 font-bold hover:text-orange-700 flex items-center hover:translate-x-1 transition-transform">
+                        <button className="text-blue-600 font-bold hover:text-blue-700 flex items-center hover:translate-x-1 transition-transform">
                             View All <ExternalLink size={16} className="ml-1" />
                         </button>
                     </div>
@@ -173,7 +173,7 @@ const Dashboard = () => {
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.4 + (i * 0.1) }}
-                                className="flex items-center p-5 bg-white dark:bg-surface-900 rounded-3xl shadow-sm border border-surface-200 dark:border-surface-800 hover:border-orange-200 dark:hover:border-orange-900 hover:shadow-md transition-all group"
+                                className="flex items-center p-5 bg-white dark:bg-surface-900 rounded-3xl shadow-sm border border-surface-200 dark:border-surface-800 hover:border-blue-200 dark:hover:border-blue-900 hover:shadow-md transition-all group"
                             >
                                 <div className={`h-14 w-14 rounded-2xl bg-${file.color}-50 dark:bg-${file.color}-900/20 flex items-center justify-center text-${file.color}-600 dark:text-${file.color}-400 mr-5 group-hover:scale-110 transition-transform`}>
                                     <file.icon size={24} />
@@ -182,7 +182,7 @@ const Dashboard = () => {
                                     <h4 className="font-bold text-surface-900 dark:text-white truncate text-lg">{file.name}</h4>
                                     <p className="text-sm text-surface-500">{file.date} • {file.size}</p>
                                 </div>
-                                <button className="p-3 hover:bg-surface-50 dark:hover:bg-surface-800 rounded-xl text-surface-400 hover:text-orange-500 transition-colors">
+                                <button className="p-3 hover:bg-surface-50 dark:hover:bg-surface-800 rounded-xl text-surface-400 hover:text-blue-500 transition-colors">
                                     <Download size={20} />
                                 </button>
                             </motion.div>
