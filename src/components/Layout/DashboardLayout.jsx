@@ -13,7 +13,7 @@ const DashboardLayout = ({ children }) => {
             <div className="flex-1 flex flex-col min-w-0">
                 <Navbar />
 
-                <main className="flex-1 p-8 overflow-auto">
+                <main className="flex-1 overflow-auto">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={window.location.pathname}

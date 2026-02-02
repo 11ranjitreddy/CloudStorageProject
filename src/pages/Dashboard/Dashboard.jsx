@@ -7,42 +7,27 @@ import {
     Download,
     Trash2,
     ExternalLink,
-    Plus
+    Plus,
+    Music,
+    Folder,
+    Search,
+    Cloud,
+    HardDrive,
+    Users
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import UploadModal from '../../components/Upload/UploadModal';
 
-const StatCard = ({ title, value, subtext, icon: Icon, color }) => (
-    <div className="card p-6 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
-        <div className={`absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity text-${color}-600`}>
-            <Icon size={120} />
-        </div>
-        <div className="relative z-10 flex flex-col h-full justify-between">
-            <div className="flex items-center justify-between mb-4">
-                <div className={`p-3 rounded-2xl bg-${color}-50 dark:bg-${color}-900/20 text-${color}-600 dark:text-${color}-400 ring-1 ring-${color}-100 dark:ring-${color}-800`}>
-                    <Icon size={24} />
-                </div>
-                <span className={`text-xs font-bold px-2 py-1 rounded-full bg-${color}-100/50 dark:bg-${color}-900/30 text-${color}-700 dark:text-${color}-300`}>
-                    +12%
-                </span>
-            </div>
-            <div>
-                <h3 className="text-3xl font-bold text-surface-900 dark:text-white tracking-tight">{value}</h3>
-                <p className="text-sm text-surface-500 font-medium mt-1">{title}</p>
-            </div>
-            <div className="mt-4 pt-4 border-t border-surface-100 dark:border-surface-800/50">
-                <p className="text-xs text-surface-400 dark:text-surface-500 flex items-center">
-                    <div className={`w-1.5 h-1.5 rounded-full bg-${color}-500 mr-2`}></div>
-                    {subtext}
-                </p>
-            </div>
-        </div>
-    </div>
-);
-
 const Dashboard = () => {
     const [isUploadOpen, setIsUploadOpen] = useState(false);
+
+    const categories = [
+        { title: 'All Files', count: '1,284 files', icon: FileText, color: 'blue', size: '25%' },
+        { title: 'Images', count: '845 photos', icon: ImageIcon, color: 'purple', size: '40%' },
+        { title: 'Videos', count: '142 videos', icon: Video, color: 'orange', size: '60%' },
+        { title: 'Music', count: '320 tracks', icon: Music, color: 'pink', size: '15%' },
+    ];
 
     const recentFiles = [
         { name: 'Project_Requirements.pdf', type: 'PDF', size: '2.4 MB', date: '2 hours ago', icon: FileText, color: 'blue' },
@@ -52,76 +37,160 @@ const Dashboard = () => {
 
     return (
         <DashboardLayout>
-            <div className="max-w-7xl mx-auto space-y-8">
-                <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                        <h1 className="text-2xl font-bold text-surface-900 dark:text-white">Good morning, John!</h1>
-                        <p className="text-surface-500 dark:text-surface-400 mt-1">Here's what's happening with your files today.</p>
+            <div className="relative min-h-screen bg-surface-50 dark:bg-surface-950 pb-20">
+                {/* Hero Section - Swiggy Style */}
+                <div className="relative bg-gradient-to-r from-orange-500 to-rose-500 dark:from-orange-600 dark:to-rose-700 pb-40 pt-16 px-8">
+                    <div className="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
+                        <motion.div
+                            initial={{ y: -20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            className="flex items-center space-x-2 text-white/90 mb-6 bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm font-medium border border-white/20"
+                        >
+                            <span className="animate-pulse">✨</span>
+                            <span>Premium Cloud Storage</span>
+                        </motion.div>
+
+                        <motion.h1
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            className="text-4xl md:text-6xl font-black text-white tracking-tight mb-6 drop-shadow-sm"
+                        >
+                            Store everything. <br /> Access anywhere.
+                        </motion.h1>
+
+                        <motion.p
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-lg text-white/90 max-w-2xl mb-12 font-medium"
+                        >
+                            Secure, fast, and organized space for all your digital assets.
+                        </motion.p>
+
+                        {/* Search Bar */}
+                        <motion.div
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.2 }}
+                            className="w-full max-w-2xl relative group z-20"
+                        >
+                            <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                                <Search className="h-6 w-6 text-surface-400 group-focus-within:text-orange-500 transition-colors" />
+                            </div>
+                            <input
+                                type="text"
+                                className="block w-full pl-14 pr-4 py-5 rounded-2xl border-none shadow-2xl bg-white text-surface-900 placeholder-surface-400 focus:ring-4 focus:ring-orange-500/30 text-lg transition-all"
+                                placeholder="Search for files, folders, or documents..."
+                            />
+                            <div className="absolute inset-y-0 right-3 flex items-center">
+                                <button className="bg-orange-500 hover:bg-orange-600 text-white p-2.5 rounded-xl transition-colors shadow-lg shadow-orange-500/30">
+                                    <Cloud className="h-6 w-6" />
+                                </button>
+                            </div>
+                        </motion.div>
                     </div>
-                    <button
-                        onClick={() => setIsUploadOpen(true)}
-                        className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white rounded-xl shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 transition-all duration-300 font-medium"
+
+                    {/* Decorative Background Elements */}
+                    <div className="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 w-[500px] h-[500px] bg-yellow-500/20 rounded-full blur-3xl"></div>
+
+                    {/* Floating Abstract Shapes */}
+                    <motion.div
+                        animate={{ y: [0, -20, 0] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute left-10 top-20 text-white/20 hidden lg:block"
                     >
-                        <Plus size={20} />
-                        <span>Upload Content</span>
-                    </button>
-                </header>
-
-                {/* Modal */}
-                <UploadModal isOpen={isUploadOpen} onClose={() => setIsUploadOpen(false)} />
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <StatCard title="Total Files" value="1,284" subtext="+12 since last week" icon={FileText} color="primary" />
-                    <StatCard title="Storage Used" value="45.8 GB" subtext="72% of 64GB plan" icon={ImageIcon} color="purple" />
-                    <StatCard title="Total Shared" value="86" subtext="4 active links" icon={ExternalLink} color="blue" />
-                    <StatCard title="Downloads" value="2.4k" subtext="+15% monthly growth" icon={Download} color="green" />
+                        <FileText size={64} />
+                    </motion.div>
+                    <motion.div
+                        animate={{ y: [0, 20, 0] }}
+                        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                        className="absolute right-10 bottom-40 text-white/20 hidden lg:block"
+                    >
+                        <ImageIcon size={64} />
+                    </motion.div>
                 </div>
 
-                <section className="space-y-4">
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-xl font-bold text-surface-900 dark:text-white">Recent Uploads</h2>
-                        <button className="text-sm font-medium text-primary-600 hover:text-primary-500">View All</button>
+                {/* Floating Cards Section */}
+                <div className="max-w-7xl mx-auto px-6 -mt-24 relative z-20">
+                    <div className="flex flex-col md:flex-row items-center justify-between mb-8 px-2">
+                        <h2 className="text-2xl font-bold text-white drop-shadow-md hidden md:block">Your Collections</h2>
+                        <button
+                            onClick={() => setIsUploadOpen(true)}
+                            className="flex items-center space-x-2 px-6 py-3 bg-white text-orange-600 rounded-full shadow-xl hover:bg-orange-50 transition-all font-bold transform hover:-translate-y-0.5"
+                        >
+                            <Plus size={20} />
+                            <span>Quick Upload</span>
+                        </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {categories.map((cat, i) => (
+                            <motion.div
+                                key={cat.title}
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2 + (i * 0.1) }}
+                                className="bg-white dark:bg-surface-900 rounded-[2rem] p-7 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group cursor-pointer relative overflow-hidden ring-1 ring-surface-100 dark:ring-surface-800"
+                            >
+                                <div className={`absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-${cat.color}-50 dark:bg-${cat.color}-900/10 transition-transform duration-500 group-hover:scale-125`}></div>
+
+                                <div className="relative z-10">
+                                    <div className="flex justify-between items-start mb-6">
+                                        <div className={`p-4 rounded-2xl bg-${cat.color}-50 dark:bg-${cat.color}-900/20 text-${cat.color}-500 group-hover:bg-${cat.color}-100 dark:group-hover:bg-${cat.color}-900/40 transition-colors`}>
+                                            <cat.icon size={32} />
+                                        </div>
+                                    </div>
+
+                                    <h3 className="text-2xl font-black text-surface-900 dark:text-white mb-1 group-hover:text-blue-600 transition-colors">{cat.title}</h3>
+                                    <p className="text-surface-500 font-medium mb-6">{cat.count}</p>
+
+                                    <div className="flex items-center space-x-2 text-xs font-bold text-surface-400 uppercase tracking-wider">
+                                        <span>Storage</span>
+                                        <div className="flex-1 h-2 bg-surface-100 dark:bg-surface-800 rounded-full overflow-hidden">
+                                            <div className={`h-full bg-${cat.color}-500 rounded-full`} style={{ width: cat.size }}></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Recent Activities/Uploads */}
+                <div className="max-w-7xl mx-auto px-6 mt-16">
+                    <div className="flex items-center justify-between mb-8 px-2">
+                        <h2 className="text-2xl font-bold text-surface-900 dark:text-white">Recent Activities</h2>
+                        <button className="text-orange-600 font-bold hover:text-orange-700 flex items-center hover:translate-x-1 transition-transform">
+                            View All <ExternalLink size={16} className="ml-1" />
+                        </button>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {recentFiles.map((file, i) => (
                             <motion.div
-                                key={file.name}
+                                key={i}
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: i * 0.1 }}
-                                className="card p-5 group hover:border-primary-500 focus-within:border-primary-500 transition-all cursor-pointer"
+                                transition={{ delay: 0.4 + (i * 0.1) }}
+                                className="flex items-center p-5 bg-white dark:bg-surface-900 rounded-3xl shadow-sm border border-surface-200 dark:border-surface-800 hover:border-orange-200 dark:hover:border-orange-900 hover:shadow-md transition-all group"
                             >
-                                <div className="flex items-start justify-between">
-                                    <div className={`p-3 rounded-lg bg-${file.color}-50 dark:bg-${file.color}-900/10 text-${file.color}-600 dark:text-${file.color}-400 group-hover:bg-${file.color}-600 group-hover:text-white transition-all`}>
-                                        <file.icon size={24} />
-                                    </div>
-                                    <button className="p-1 text-surface-400 hover:text-surface-600 dark:hover:text-surface-200">
-                                        <MoreHorizontal size={20} />
-                                    </button>
+                                <div className={`h-14 w-14 rounded-2xl bg-${file.color}-50 dark:bg-${file.color}-900/20 flex items-center justify-center text-${file.color}-600 dark:text-${file.color}-400 mr-5 group-hover:scale-110 transition-transform`}>
+                                    <file.icon size={24} />
                                 </div>
-                                <div className="mt-4">
-                                    <h4 className="font-semibold text-surface-900 dark:text-white truncate">{file.name}</h4>
-                                    <div className="flex items-center space-x-2 mt-1 text-xs text-surface-500">
-                                        <span>{file.size}</span>
-                                        <span>•</span>
-                                        <span>{file.date}</span>
-                                    </div>
+                                <div className="flex-1 min-w-0">
+                                    <h4 className="font-bold text-surface-900 dark:text-white truncate text-lg">{file.name}</h4>
+                                    <p className="text-sm text-surface-500">{file.date} • {file.size}</p>
                                 </div>
-                                <div className="grid grid-cols-2 gap-3 mt-6">
-                                    <button className="flex items-center justify-center space-x-2 py-2 px-3 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 rounded-lg text-sm font-medium hover:bg-emerald-100 dark:hover:bg-emerald-900/40 transition-colors">
-                                        <Download size={14} />
-                                        <span>Download</span>
-                                    </button>
-                                    <button className="flex items-center justify-center space-x-2 py-2 px-3 bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400 rounded-lg text-sm font-medium hover:bg-rose-100 dark:hover:bg-rose-900/40 transition-colors">
-                                        <Trash2 size={14} />
-                                        <span>Delete</span>
-                                    </button>
-                                </div>
+                                <button className="p-3 hover:bg-surface-50 dark:hover:bg-surface-800 rounded-xl text-surface-400 hover:text-orange-500 transition-colors">
+                                    <Download size={20} />
+                                </button>
                             </motion.div>
                         ))}
                     </div>
-                </section>
+                </div>
+
+                <UploadModal isOpen={isUploadOpen} onClose={() => setIsUploadOpen(false)} />
             </div>
         </DashboardLayout>
     );

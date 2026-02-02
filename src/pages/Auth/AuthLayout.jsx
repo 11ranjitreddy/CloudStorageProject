@@ -72,7 +72,7 @@ const AuthLayout = () => {
                     </div>
 
                     <Outlet />
-                </motion.div>
+                </div>
 
                 <div className="absolute bottom-6 text-xs text-surface-400 dark:text-surface-600">
                     &copy; {new Date().getFullYear()} CloudVault Inc. All rights reserved.

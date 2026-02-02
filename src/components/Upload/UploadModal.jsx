@@ -29,8 +29,10 @@ const UploadModal = ({ isOpen, onClose }) => {
     };
 
     const handleFileSelect = (e) => {
-        const selectedFiles = Array.from(e.target.files);
-        setFiles((prev) => [...prev, ...selectedFiles]);
+        if (e.target.files && e.target.files.length > 0) {
+            const selectedFiles = Array.from(e.target.files);
+            setFiles((prev) => [...prev, ...selectedFiles]);
+        }
     };
 
     const removeFile = (index) => {
@@ -88,46 +90,61 @@ const UploadModal = ({ isOpen, onClose }) => {
                         <div
                             onDragOver={onDragOver}
                             onDrop={onDrop}
-                            className="relative border-2 border-dashed border-surface-300 dark:border-surface-700 rounded-2xl p-10 flex flex-col items-center justify-center text-center group hover:border-primary-500 transition-all bg-surface-50 dark:bg-surface-900/50"
+                            className="relative border-2 border-dashed border-surface-300 dark:border-surface-700 rounded-2xl p-8 flex flex-col items-center justify-center text-center group hover:border-primary-500 transition-all bg-surface-50 dark:bg-surface-900/50"
                         >
-                            <div className="p-4 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full mb-4 group-hover:scale-110 transition-transform">
-                                <Upload size={32} />
-                            </div>
-                            <h4 className="text-lg font-semibold text-surface-900 dark:text-white">Drag & drop files or folders</h4>
-                            <p className="text-sm text-surface-500 mt-2 mb-6">Support for images, videos, docs, and more</p>
-
-                            <div className="flex items-center space-x-4 relative z-20">
-                                <label className="cursor-pointer px-4 py-2 bg-white dark:bg-surface-800 border border-surface-200 dark:border-surface-700 rounded-lg text-sm font-medium text-surface-700 dark:text-surface-300 hover:bg-surface-50 dark:hover:bg-surface-700 transition-colors shadow-sm">
-                                    <span>Browse Files</span>
-                                    <input
-                                        type="file"
-                                        multiple
-                                        className="hidden"
-                                        onChange={handleFileSelect}
-                                    />
-                                </label>
-                                <span className="text-surface-400 text-sm">or</span>
-                                <label className="cursor-pointer px-4 py-2 bg-white dark:bg-surface-800 border border-surface-200 dark:border-surface-700 rounded-lg text-sm font-medium text-surface-700 dark:text-surface-300 hover:bg-surface-50 dark:hover:bg-surface-700 transition-colors shadow-sm">
-                                    <span>Upload Folder</span>
-                                    <input
-                                        type="file"
-                                        webkitdirectory=""
-                                        directory=""
-                                        multiple
-                                        className="hidden"
-                                        onChange={handleFileSelect}
-                                    />
-                                </label>
+                            <div className="mb-6 pointer-events-none">
+                                <div className="p-4 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full shadow-lg inline-block">
+                                    <Upload size={32} />
+                                </div>
                             </div>
 
-                            {/* Overlay Drag Zone */}
+                            <h4 className="text-xl font-bold text-surface-900 dark:text-white mb-6">Select Content Type</h4>
+
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full relative z-20 max-w-lg">
+                                {/* Upload File */}
+                                <label className="cursor-pointer flex flex-col items-center justify-center p-4 bg-white dark:bg-surface-800 border border-surface-200 dark:border-surface-700 hover:border-primary-500 hover:bg-primary-50 dark:hover:bg-primary-900/10 rounded-xl transition-all shadow-sm hover:shadow-md group/btn">
+                                    <File size={24} className="text-surface-600 dark:text-surface-400 group-hover/btn:text-primary-600 mb-2" />
+                                    <span className="text-xs font-semibold text-surface-700 dark:text-surface-300">File</span>
+                                    <input type="file" multiple className="hidden" onChange={handleFileSelect} />
+                                </label>
+
+                                {/* Upload Folder */}
+                                <label className="cursor-pointer flex flex-col items-center justify-center p-4 bg-white dark:bg-surface-800 border border-surface-200 dark:border-surface-700 hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-900/10 rounded-xl transition-all shadow-sm hover:shadow-md group/btn">
+                                    <Folder size={24} className="text-surface-600 dark:text-surface-400 group-hover/btn:text-indigo-600 mb-2" />
+                                    <span className="text-xs font-semibold text-surface-700 dark:text-surface-300">Folder</span>
+                                    <input type="file" webkitdirectory="" directory="" multiple className="hidden" onChange={handleFileSelect} />
+                                </label>
+
+                                {/* Upload Image */}
+                                <label className="cursor-pointer flex flex-col items-center justify-center p-4 bg-white dark:bg-surface-800 border border-surface-200 dark:border-surface-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/10 rounded-xl transition-all shadow-sm hover:shadow-md group/btn">
+                                    <ImageIcon size={24} className="text-surface-600 dark:text-surface-400 group-hover/btn:text-blue-600 mb-2" />
+                                    <span className="text-xs font-semibold text-surface-700 dark:text-surface-300">Image</span>
+                                    <input type="file" accept="image/*" multiple className="hidden" onChange={handleFileSelect} />
+                                </label>
+
+                                {/* Upload Video */}
+                                <label className="cursor-pointer flex flex-col items-center justify-center p-4 bg-white dark:bg-surface-800 border border-surface-200 dark:border-surface-700 hover:border-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/10 rounded-xl transition-all shadow-sm hover:shadow-md group/btn">
+                                    <Video size={24} className="text-surface-600 dark:text-surface-400 group-hover/btn:text-rose-600 mb-2" />
+                                    <span className="text-xs font-semibold text-surface-700 dark:text-surface-300">Video</span>
+                                    <input type="file" accept="video/*" multiple className="hidden" onChange={handleFileSelect} />
+                                </label>
+
+                                {/* Upload Audio */}
+                                <label className="cursor-pointer flex flex-col items-center justify-center p-4 bg-white dark:bg-surface-800 border border-surface-200 dark:border-surface-700 hover:border-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/10 rounded-xl transition-all shadow-sm hover:shadow-md group/btn">
+                                    <Music size={24} className="text-surface-600 dark:text-surface-400 group-hover/btn:text-amber-600 mb-2" />
+                                    <span className="text-xs font-semibold text-surface-700 dark:text-surface-300">Audio</span>
+                                    <input type="file" accept="audio/*" multiple className="hidden" onChange={handleFileSelect} />
+                                </label>
+                            </div>
+
+                            {/* Overlay Drag Zone for General */}
                             <input
                                 type="file"
                                 multiple
-                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                                onChange={handleFileSelect}
+                                className="absolute inset-0 w-full h-full opacity-0 cursor-default pointer-events-none"
                                 title=""
                             />
+                            <p className="text-xs text-surface-400 mt-6">or drag and drop anywhere in this area</p>
                         </div>
 
                         {files.length > 0 && (
