@@ -8,7 +8,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 // Lazy load pages for better performance
 const Dashboard = React.lazy(() => import('./pages/Dashboard/Dashboard'));
 const FileManager = React.lazy(() => import('./pages/FileManager/FileManager'));
-const Logs = React.lazy(() => import('./pages/Logs/Logs'));
+const ActivityLogs = React.lazy(() => import('./pages/ActivityLogs/ActivityLogs'));
 const Settings = React.lazy(() => import('./pages/Settings/Settings'));
 const AuthLayout = React.lazy(() => import('./pages/Auth/AuthLayout'));
 const Login = React.lazy(() => import('./pages/Auth/Login'));
@@ -60,7 +60,7 @@ function App() {
 
                     <Route path="/activities" element={
                         <ProtectedRoute>
-                            <Logs />
+                            <ActivityLogs />
                         </ProtectedRoute>
                     } />
 
