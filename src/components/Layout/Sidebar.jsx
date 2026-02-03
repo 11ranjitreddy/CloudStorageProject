@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import {
     LayoutDashboard,
     FolderOpen,
@@ -32,7 +32,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
             )}
         >
             <div className="p-6 flex items-center justify-between">
-                <div className={clsx("flex items-center space-x-3 overflow-hidden transition-all duration-300", collapsed ? "w-0 opacity-0" : "w-auto opacity-100")}>
+                <Link to="/dashboard" className={clsx("flex items-center space-x-3 overflow-hidden transition-all duration-300", collapsed ? "w-0 opacity-0" : "w-auto opacity-100")}>
                     <div className="bg-gradient-to-tr from-primary-600 to-indigo-500 p-2.5 rounded-xl text-white shadow-glow">
                         <ShieldAlert size={22} />
                     </div>
@@ -40,7 +40,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
                         <span className="font-bold text-lg dark:text-white tracking-tight block leading-none">CloudVault</span>
                         <span className="text-[10px] text-surface-500 font-medium tracking-wider uppercase">Enterprise</span>
                     </div>
-                </div>
+                </Link>
                 <button
                     onClick={() => setCollapsed(!collapsed)}
                     className="p-2 hover:bg-surface-200/50 dark:hover:bg-surface-800/50 rounded-xl text-surface-500 transition-colors"

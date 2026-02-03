@@ -18,6 +18,7 @@ import {
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import UploadModal from '../../components/Upload/UploadModal';
+import ScrollReveal from '../../components/UI/ScrollReveal';
 
 const Dashboard = () => {
     const [isUploadOpen, setIsUploadOpen] = useState(false);
