@@ -13,6 +13,7 @@ const Settings = React.lazy(() => import('./pages/Settings/Settings'));
 const AuthLayout = React.lazy(() => import('./pages/Auth/AuthLayout'));
 const Login = React.lazy(() => import('./pages/Auth/Login'));
 const Register = React.lazy(() => import('./pages/Auth/Register'));
+const VerifyEmail = React.lazy(() => import('./pages/Auth/VerifyEmail'));
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -37,6 +38,7 @@ function App() {
                     <Route path="/auth" element={<AuthLayout />}>
                         <Route path="login" element={<Login />} />
                         <Route path="register" element={<Register />} />
+                        <Route path="verify-email" element={<VerifyEmail />} />
                         <Route index element={<Navigate to="/auth/login" replace />} />
                     </Route>
 

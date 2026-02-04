@@ -29,7 +29,7 @@ const ScrollReveal = ({
         <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }} // Triggers when 50px of the element is visible
+            viewport={{ once: false, margin: "-50px" }} // Triggers every time the element enters view
             variants={variants}
             className={className}
         >

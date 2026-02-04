@@ -30,8 +30,9 @@ const Register = () => {
         // Simulate API call
         setTimeout(() => {
             setLoading(false);
-            toast.success('Account created! Please sign in.');
-            navigate('/auth/login');
+            toast.success('Account created! Please verify your email.');
+            // Navigate to verification page with email
+            navigate('/auth/verify-email', { state: { email: data.email } });
         }, 1500);
     };
 
